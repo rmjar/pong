@@ -36,7 +36,7 @@ public class GameField extends JPanel
 
     private float mouseY;
 
-    private Font stringFont = new FontLoader().setFont("score"); //new Font("Lucida Sans", Font.BOLD, 80);
+    private Font stringFont = new FontLoader().setFont("score");
 
     private Greetings greetings;
     private Ball ball;

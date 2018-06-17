@@ -20,8 +20,7 @@ public class Greetings {
     private Color cStroke = new Color(255, 255, 254);
     private Color bg = new Color(0, 0, 0);
     private Font titleFont = new FontLoader().setFont("title");
-    // Font.BOLD, 160);
-    private Font subTitleFont = new FontLoader().setFont("subtitle");//new Font("Arial Black", Font.BOLD, 70);
+    private Font subTitleFont = new FontLoader().setFont("subtitle");
     private GameField gameField;
     private double degrees = 0;
 
