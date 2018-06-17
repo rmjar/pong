@@ -14,7 +14,7 @@ import java.awt.geom.Rectangle2D;
 import static pl.rozanski.pong.GameInstance.GAME_INSTANCE;
 
 
-public class Surface extends JPanel
+public class GameField extends JPanel
         implements ActionListener, KeyListener, MouseMotionListener, ComponentListener {
 
     public static final int initialX = 800;
@@ -36,12 +36,12 @@ public class Surface extends JPanel
 
     private float mouseY;
 
-    private Font stringFont = new Font("Lucida Sans", Font.BOLD, 80);
+    private Font stringFont = new FontLoader().setFont("score"); //new Font("Lucida Sans", Font.BOLD, 80);
 
     private Greetings greetings;
     private Ball ball;
 
-    public Surface() {
+    public GameField() {
         initSurface();
         addKeyListener(this);
         addMouseMotionListener(this);

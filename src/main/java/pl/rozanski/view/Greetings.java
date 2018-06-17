@@ -19,14 +19,15 @@ public class Greetings {
     private Color c = new Color(255, 255, 255);
     private Color cStroke = new Color(255, 255, 254);
     private Color bg = new Color(0, 0, 0);
-    private Font titleFont = new Font("Arial Black", Font.BOLD, 160);
-    private Font subTitleFont = new Font("Arial Black", Font.BOLD, 70);
-    private Surface surface;
+    private Font titleFont = new FontLoader().setFont("title");
+    // Font.BOLD, 160);
+    private Font subTitleFont = new FontLoader().setFont("subtitle");//new Font("Arial Black", Font.BOLD, 70);
+    private GameField gameField;
     private double degrees = 0;
 
     public static boolean needsUpdate = true;
 
-    public Greetings(Surface surface) {
+    public Greetings(GameField gameField) {
         try {
             ClassLoader classLoader = getClass().getClassLoader();
             InputStream inputStream = classLoader.getResourceAsStream("graphics/rainbow.jpg");
@@ -34,13 +35,13 @@ public class Greetings {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.surface = surface;
+        this.gameField = gameField;
 
     }
 
     public void initGreetings(String greets) {
 
-        BufferedImage buff = new BufferedImage(surface.getWidth(), surface.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage buff = new BufferedImage(gameField.getWidth(), gameField.getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D gbi = buff.createGraphics();
         gbi.setBackground(bg);
 
@@ -70,12 +71,8 @@ public class Greetings {
     private void gameOverSubTitleGreets(BufferedImage buff, Graphics2D gbi) {
         float width;
         float height;
-        String tmp;
-        if (GAME_INSTANCE.getScore()[0] > 3) {
-            tmp = "LEFT WON";
-        } else {
-            tmp = "RIGHT WON";
-        }
+        String tmp = GAME_INSTANCE.getWon() + " WON";
+
         gbi.setFont(subTitleFont);
         width = gbi.getFontMetrics().stringWidth(tmp);
         height = gbi.getFontMetrics().getHeight();
@@ -106,7 +103,7 @@ public class Greetings {
             initGreetings(greets);
             needsUpdate = false;
         }
-        g2d.drawImage(rainbow, op, (surface.getWidth() - rainbow.getWidth()) / 2, (surface.getHeight() - rainbow.getHeight() / 2) / 4);
+        g2d.drawImage(rainbow, op, (gameField.getWidth() - rainbow.getWidth()) / 2, (gameField.getHeight() - rainbow.getHeight() / 2) / 4);
         g2d.drawImage(this.buff, 0, 0, null);
 
     }

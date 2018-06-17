@@ -13,6 +13,7 @@ public enum GameInstance {
 
     private int[] score = {0, 0};
     private GameState gameState = GameState.GREETINGS;
+    private String won = "";
 
 
     private Paddle paddleLeft = new Paddle();
@@ -101,6 +102,11 @@ public enum GameInstance {
 
     private void changeGameOver() {
         if (score[0] > Pong.MAX_SCORE || score[1] > Pong.MAX_SCORE) {
+            if (score[0] > Pong.MAX_SCORE) {
+                won = "LEFT";
+            } else {
+                won = "RIGHT";
+            }
             gameState = GameState.GAME_OVER;
             Greetings.needsUpdate = true;
         }
@@ -139,5 +145,9 @@ public enum GameInstance {
 
     public Ball getBall() {
         return ball;
+    }
+
+    public String getWon() {
+        return won;
     }
 }

@@ -1,6 +1,6 @@
 package pl.rozanski.pong;
 
-import pl.rozanski.view.Surface;
+import pl.rozanski.view.GameField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +19,9 @@ public class Pong extends JFrame {
     }
 
     private void initUI() {
-        add(new Surface());
+        add(new GameField());
         setTitle("Pong");
-        setSize(Surface.initialX, Surface.initialY);
+        setSize(GameField.initialX, GameField.initialY);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
