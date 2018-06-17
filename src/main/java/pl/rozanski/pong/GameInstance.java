@@ -25,9 +25,7 @@ public enum GameInstance {
 
     public void initGame() {
         score[0] = score[1] = 0;
-        ball.initBall();
-        paddleLeft.initPaddle(true);
-        paddleRight.initPaddle(false);
+        setBallAndPaddles();
     }
 
 
@@ -80,28 +78,40 @@ public enum GameInstance {
 
 
         if (ball.x >= Pong.MAX_X || ball.x <= Pong.MIN_X) {
-            if (ball.x >= Pong.MAX_X) {
-                score[0]++;
-            } else {
-                score[1]++;
-            }
-            if (score[0] > Pong.MAX_SCORE || score[1] > Pong.MAX_SCORE) {
-                gameState = GameState.GAME_OVER;
-                Greetings.needsUpdate = true;
-            }
+            increaseScore();
+            changeGameOver();
             effect3.play();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
-            ball.initBall();
-            paddleLeft.initPaddle(true);
-            paddleRight.initPaddle(false);
+            setBallAndPaddles();
         }
 
 
         paddleLeft.movePaddle(true);
         paddleRight.movePaddle(false);
+    }
+
+    private void setBallAndPaddles() {
+        ball.initBall();
+        paddleLeft.initPaddle(true);
+        paddleRight.initPaddle(false);
+    }
+
+    private void changeGameOver() {
+        if (score[0] > Pong.MAX_SCORE || score[1] > Pong.MAX_SCORE) {
+            gameState = GameState.GAME_OVER;
+            Greetings.needsUpdate = true;
+        }
+    }
+
+    private void increaseScore() {
+        if (ball.x >= Pong.MAX_X) {
+            score[0]++;
+        } else {
+            score[1]++;
+        }
     }
 
     public String scoreToString() {
